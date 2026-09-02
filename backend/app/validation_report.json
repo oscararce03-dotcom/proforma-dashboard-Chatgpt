@@ -1,0 +1,374 @@
+{
+  "workbook": "Graficos Aportes Proforma.xlsm",
+  "sheets": {
+    "Cuadro de Mando": {
+      "rows": 72,
+      "columns": [
+        "Unnamed: 0",
+        "Unnamed: 1",
+        "Unnamed: 2",
+        "Unnamed: 3",
+        "Unnamed: 4",
+        "Unnamed: 5",
+        "Unnamed: 6",
+        "Unnamed: 7",
+        "Unnamed: 8",
+        "Unnamed: 9",
+        "Unnamed: 10",
+        "Unnamed: 11",
+        "Unnamed: 12",
+        "Unnamed: 13",
+        "Unnamed: 14"
+      ],
+      "non_empty_rows": 59
+    },
+    "Comp 2024-2025": {
+      "rows": 46,
+      "columns": [
+        "Unnamed: 0",
+        "Unnamed: 1",
+        "Unnamed: 2",
+        "Unnamed: 3",
+        "Unnamed: 4",
+        "Unnamed: 5"
+      ],
+      "non_empty_rows": 39
+    },
+    "Comp 2025-2026": {
+      "rows": 46,
+      "columns": [
+        "Unnamed: 0",
+        "Unnamed: 1",
+        "Unnamed: 2",
+        "Unnamed: 3",
+        "Unnamed: 4",
+        "Unnamed: 5"
+      ],
+      "non_empty_rows": 39
+    },
+    "Comp PP 2025-2026": {
+      "rows": 62,
+      "columns": [
+        "Mes Comparación:",
+        "JULIO 2026",
+        "Unnamed: 2",
+        "Unnamed: 3",
+        "Unnamed: 4",
+        "Unnamed: 5",
+        "Unnamed: 6",
+        "Unnamed: 7"
+      ],
+      "non_empty_rows": 51
+    },
+    "Comp Aportes": {
+      "rows": 1103,
+      "columns": [
+        "JULIO 2026",
+        "Unnamed: 1",
+        "Unnamed: 2",
+        "Unnamed: 3",
+        "Unnamed: 4",
+        "Unnamed: 5",
+        "0",
+        "Unnamed: 7"
+      ],
+      "non_empty_rows": 1102
+    },
+    "80-20": {
+      "rows": 540,
+      "columns": [
+        "Unnamed: 0",
+        "Unnamed: 1",
+        "Unnamed: 2",
+        "Unnamed: 3",
+        "Unnamed: 4",
+        "Unnamed: 5",
+        "Unnamed: 6",
+        "Unnamed: 7",
+        "Unnamed: 8",
+        "Unnamed: 9",
+        "Unnamed: 10"
+      ],
+      "non_empty_rows": 539
+    },
+    "Oport Crecimiento Zona": {
+      "rows": 28,
+      "columns": [
+        "Unnamed: 0",
+        "Unnamed: 1",
+        "Unnamed: 2",
+        "Unnamed: 3",
+        "Unnamed: 4",
+        "Unnamed: 5"
+      ],
+      "non_empty_rows": 23
+    },
+    "Oportunidad Crecimiento": {
+      "rows": 1018,
+      "columns": [
+        "Unnamed: 0",
+        "Unnamed: 1",
+        "Unnamed: 2",
+        "Unnamed: 3",
+        "Unnamed: 4",
+        "Unnamed: 5",
+        "Unnamed: 6"
+      ],
+      "non_empty_rows": 1017
+    },
+    "2024": {
+      "rows": 3324,
+      "columns": [
+        "Nro",
+        "Id Aporte",
+        "#Year",
+        "#Docu",
+        "Rut",
+        "Empresa",
+        "Sucursal",
+        "Monto",
+        "Fecha",
+        "FecCheque",
+        "Tasa",
+        "Tipo",
+        "Zona",
+        "Modalidad",
+        "Ejecutivo",
+        "Glosa",
+        "T1",
+        "T2",
+        "T3",
+        "TX",
+        "MtoAdm_AP",
+        "MtoAdm_T1",
+        "MtoAdm_T2",
+        "MtoAdm_T3",
+        "Tipo_Socio"
+      ],
+      "non_empty_rows": 3324
+    },
+    "2025": {
+      "rows": 3727,
+      "columns": [
+        "Nro",
+        "Id Aporte",
+        "#Year",
+        "#Docu",
+        "Rut",
+        "Empresa",
+        "Sucursal",
+        "Monto",
+        "Fecha",
+        "FecCheque",
+        "Tasa",
+        "Tipo",
+        "Zona",
+        "Modalidad",
+        "Ejecutivo",
+        "Glosa",
+        "T1",
+        "T2",
+        "T3",
+        "TX",
+        "MtoAdm_AP",
+        "MtoAdm_T1",
+        "MtoAdm_T2",
+        "MtoAdm_T3",
+        "Tipo_Socio"
+      ],
+      "non_empty_rows": 3727
+    },
+    "2026": {
+      "rows": 1516,
+      "columns": [
+        "Nro",
+        "Id Aporte",
+        "#Year",
+        "#Docu",
+        "Rut",
+        "Empresa",
+        "Sucursal",
+        "Monto",
+        "Fecha",
+        "FecCheque",
+        "Tasa",
+        "Tipo",
+        "Zona",
+        "Modalidad",
+        "Ejecutivo",
+        "Glosa",
+        "T1",
+        "T2",
+        "T3",
+        "TX",
+        "MtoAdm_AP",
+        "MtoAdm_T1",
+        "MtoAdm_T2",
+        "MtoAdm_T3",
+        "Tipo_Socio"
+      ],
+      "non_empty_rows": 1516
+    },
+    "Periodo Parcial 2025": {
+      "rows": 1542,
+      "columns": [
+        "Nro",
+        "Id Aporte",
+        "#Year",
+        "#Docu",
+        "Rut",
+        "Empresa",
+        "Sucursal",
+        "Monto",
+        "Fecha",
+        "FecCheque",
+        "Tasa",
+        "Tipo",
+        "Zona",
+        "Modalidad",
+        "Ejecutivo",
+        "Glosa",
+        "T1",
+        "T2",
+        "T3",
+        "TX",
+        "MtoAdm_AP",
+        "MtoAdm_T1",
+        "MtoAdm_T2",
+        "MtoAdm_T3",
+        "Tipo_Socio"
+      ],
+      "non_empty_rows": 1542
+    },
+    "Periodo Parcial 2026": {
+      "rows": 1516,
+      "columns": [
+        "Nro",
+        "Id Aporte",
+        "#Year",
+        "#Docu",
+        "Rut",
+        "Empresa",
+        "Sucursal",
+        "Monto",
+        "Fecha",
+        "FecCheque",
+        "Tasa",
+        "Tipo",
+        "Zona",
+        "Modalidad",
+        "Ejecutivo",
+        "Glosa",
+        "T1",
+        "T2",
+        "T3",
+        "TX",
+        "MtoAdm_AP",
+        "MtoAdm_T1",
+        "MtoAdm_T2",
+        "MtoAdm_T3",
+        "Tipo_Socio"
+      ],
+      "non_empty_rows": 1516
+    },
+    "Hoja1": {
+      "rows": 1015,
+      "columns": [
+        "Rut_Empresa",
+        "Nombre_Empresa",
+        "Holding",
+        "Ejecutivo",
+        "Monto 2025",
+        "Remuneración imponible 2025",
+        "0.01"
+      ],
+      "non_empty_rows": 1015
+    }
+  },
+  "checks": [
+    {
+      "check": "Hoja requerida: Cuadro de Mando",
+      "status": "OK"
+    },
+    {
+      "check": "Hoja requerida: Comp 2025-2026",
+      "status": "OK"
+    },
+    {
+      "check": "Hoja requerida: Comp PP 2025-2026",
+      "status": "OK"
+    },
+    {
+      "check": "Hoja requerida: Comp Aportes",
+      "status": "OK"
+    },
+    {
+      "check": "Hoja requerida: 80-20",
+      "status": "OK"
+    },
+    {
+      "check": "Hoja requerida: Oport Crecimiento Zona",
+      "status": "OK"
+    },
+    {
+      "check": "Hoja requerida: Oportunidad Crecimiento",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: Cuadro de Mando",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: Comp 2024-2025",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: Comp 2025-2026",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: Comp PP 2025-2026",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: Comp Aportes",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: 80-20",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: Oport Crecimiento Zona",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: Oportunidad Crecimiento",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: 2024",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: 2025",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: 2026",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: Periodo Parcial 2025",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: Periodo Parcial 2026",
+      "status": "OK"
+    },
+    {
+      "check": "Encabezados únicos: Hoja1",
+      "status": "OK"
+    }
+  ]
+}
