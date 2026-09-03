@@ -38,16 +38,29 @@ function Table({rows}:{rows:any[]}) {
 
 function App(){
  const [logged,setLogged]=useState(!!localStorage.getItem("proforma_token"));
+ const [role,setRole]=useState("");
  const [page,setPage]=useState("resumen"); const [open,setOpen]=useState(false);
  const [aportes,setAportes]=useState<any>(null); const [oport,setOport]=useState<any>(null); const [general,setGeneral]=useState<any>(null);
  const [holding,setHolding]=useState(""); const [ej,setEj]=useState(""); const [zona,setZona]=useState("");
- const nav=[["resumen","Resumen Ejecutivo"],["validacion","Validación Excel"],["qa","Control Excel vs BI"],["objetivo","Objetivo 2026"],["comparativos","Comparativos"],["detalle","Detalle Gerencial"],["comparativo","Comp 2025-2026"],["parcial","Comp PP 2025-2026"],["aportes","Comp Aportes"],["8020","Análisis 80/20"],["oportunidad","Oportunidad de Crecimiento"]];
- useEffect(()=>{if(!logged)return;api("/api/general/resumen").then(setGeneral).catch(()=>{});},[logged]);
- useEffect(()=>{if(!logged)return;if(page==="aportes")api(`/api/comercial/aportes?${holding?`holding=${encodeURIComponent(holding)}&`:""}${ej?`ejecutiva=${encodeURIComponent(ej)}`:""}`).then(setAportes);if(page==="oportunidad")api(`/api/comercial/oportunidad?${ej?`ejecutiva=${encodeURIComponent(ej)}&`:""}${zona?`zona=${encodeURIComponent(zona)}`:""}`).then(setOport)},[page,holding,ej,zona,logged]);
+ useEffect(()=>{
+   if(!logged)return;
+   api("/api/me").then((u:any)=>{
+     setRole(u.role||"");
+     if(u.role==="GERENCIA COMERCIAL" && ["resumen","validacion","qa","objetivo","comparativos","detalle"].includes(page)) setPage("comparativo");
+     if(u.role==="GERENCIA GENERAL" && ["comparativo","parcial","aportes","8020","oportunidad"].includes(page)) setPage("resumen");
+   }).catch(()=>{localStorage.removeItem("proforma_token");setLogged(false);setRole("")});
+   api("/api/general/resumen").then(setGeneral).catch(()=>{});
+ },[logged]);
+ useEffect(()=>{if(!logged)return;if(page==="aportes")api(`/api/comercial/aportes?${holding?`holding=${encodeURIComponent(holding)}&`:""}${ej?`ejecutiva=${encodeURIComponent(ej)}`:""}`).then(setAportes).catch(()=>{});if(page==="oportunidad")api(`/api/comercial/oportunidad?${ej?`ejecutiva=${encodeURIComponent(ej)}&`:""}${zona?`zona=${encodeURIComponent(zona)}`:""}`).then(setOport).catch(()=>{})},[page,holding,ej,zona,logged]);
  if(!logged)return <Login onLogin={()=>setLogged(true)}/>;
- const logout=()=>{localStorage.removeItem("proforma_token");setLogged(false)};
+ const logout=()=>{localStorage.removeItem("proforma_token");setLogged(false);setRole("")};
+ const generalNav=[["resumen","Resumen Ejecutivo"],["validacion","Validación Excel"],["qa","Control Excel vs BI"],["objetivo","Objetivo 2026"],["comparativos","Comparativos"],["detalle","Detalle Gerencial"]];
+ const comercialNav=[["comparativo","Comp 2025-2026"],["parcial","Comp PP 2025-2026"],["aportes","Comp Aportes"],["8020","Análisis 80/20"],["oportunidad","Oportunidad de Crecimiento"]];
+ const nav=role==="GERENCIA COMERCIAL"?comercialNav:role==="GERENCIA GENERAL"?generalNav:[...generalNav,...comercialNav];
  const rows=general?.rows||[];
  const content = <>
+   {page==="validacion" && <ValidationPage/>}
+   {page==="qa" && <QAPage/>}
    {page==="resumen" && <><h1>Resumen Ejecutivo</h1><p className="lead">Visión gerencial de la información del Cuadro de Mando.</p><div className="kpis"><KPI title="Registros" value={rows.length.toLocaleString("es-CL")} icon={Building2}/><KPI title="Estado" value="Operativo" icon={TrendingUp}/><KPI title="Fuente" value="Excel XLSM" icon={Target}/><KPI title="Alertas" value="Derivadas de datos" icon={AlertTriangle}/></div><section className="card"><h2>Cuadro de Mando</h2><Table rows={rows.slice(0,20)}/></section></>}
    {page==="objetivo" && <DataPage title="Objetivo 2026" endpoint="/api/general/objetivo"/>}
    {page==="comparativos" && <DataPage title="Comparativos" endpoint="/api/general/comparativos"/>}
@@ -66,6 +79,8 @@ function DataPage({title,endpoint,chart=false}:{title:string,endpoint:string,cha
 function Filters({type,holding,setHolding,ej,setEj,zona,setZona,data}:{type:string,holding:string,setHolding:any,ej:string,setEj:any,zona:string,setZona:any,data:any}){return <div className="filters"><select value={type==="aportes"?holding:ej} onChange={e=>type==="aportes"?setHolding(e.target.value):setEj(e.target.value)}><option value="">Todos</option>{(type==="aportes"?data?.holdings:data?.ejecutivas||[]).map((x:string)=><option key={x}>{x}</option>)}</select>{type==="aportes"?<select value={ej} onChange={e=>setEj(e.target.value)}><option value="">Todas las ejecutivas</option>{(data?.ejecutivas||[]).map((x:string)=><option key={x}>{x}</option>)}</select>:<select value={zona} onChange={e=>setZona(e.target.value)}><option value="">Todas las zonas</option>{(data?.zonas||[]).map((x:string)=><option key={x}>{x}</option>)}</select>}<button onClick={()=>{setHolding("");setEj("");setZona("")}}>Limpiar filtros</button></div>}
 
 function Pareto(){const [d,setD]=useState<any>(null);useEffect(()=>{api("/api/comercial/80-20").then(setD).catch(()=>{})},[]);const rows=(d?.rows||[]).filter((r:any)=>r.Holding);const chartRows=rows.map((r:any)=>({name:String(r.Holding).slice(0,16),aporte:Number(r["2025"]||0)}));const total=chartRows.reduce((a:any,b:any)=>a+b.aporte,0);let acc=0;const pareto=chartRows.map((r:any)=>{acc+=r.aporte;return {...r,acumulado:total?acc/total*100:0}});return <><h1>Análisis 80/20</h1><p className="lead">Concentración de aportes por Holding.</p><div className="kpis"><KPI title="Aporte total 2025" value={money(total)} icon={Target}/><KPI title="Nº Holdings" value={String(rows.length)} icon={Building2}/><KPI title="Top 5" value={money(pareto.slice(0,5).reduce((a:any,b:any)=>a+b.aporte,0))} icon={TrendingUp}/><KPI title="Concentración Top 10" value={pct(total?pareto.slice(0,10).reduce((a:any,b:any)=>a+b.aporte,0)/total*100:null)} icon={AlertTriangle}/></div><section className="card"><h2>Gráfico de Pareto</h2><div className="chart"><ResponsiveContainer width="100%" height={380}><LineChart data={pareto.slice(0,25)}><CartesianGrid strokeDasharray="3 3"/><XAxis dataKey="name"/><YAxis yAxisId="left"/><YAxis yAxisId="right" orientation="right" domain={[0,100]}/><Tooltip formatter={(v:any,n:any)=>n==="acumulado"?pct(v):money(v)}/><Legend/><Bar yAxisId="left" dataKey="aporte" fill="#F28C28" name="Aporte 2025"/><Line yAxisId="right" type="monotone" dataKey="acumulado" stroke="#333333" name="% acumulado"/></LineChart></ResponsiveContainer></div><Table rows={rows}/></section></>}
+
+function ValidationPage(){const[d,setD]=useState<any>(null);useEffect(()=>{api("/api/admin/validation").then(setD).catch(()=>{})},[]);const checks=d?.checks||[];return <><h1>Validación Excel</h1><p className="lead">Comprobación de hojas y datos legibles de la fuente XLSM.</p><div className="card"><div className="qa-banner"><b>{d?.status==="OK"?"✓ VALIDACIÓN OK":d?.status==="ERROR"?"✕ ERROR":"Validando…"}</b><span>{checks.length} controles</span></div></div><section className="card"><h2>Controles realizados</h2><Table rows={checks.map((x:any)=>({Control:x.name,Estado:x.status}))}/></section></>}
 
 function QAPage(){const[d,setD]=useState<any>(null);useEffect(()=>{api("/api/admin/qa").then(setD).catch(()=>{})},[]);return <><h1>Control Excel vs BI</h1><p className="lead">Validación independiente de la fuente XLSM y de los totales críticos.</p><div className="card"><div className="qa-banner"><b>{d?.status==="OK"?"✓ VALIDACIÓN OK":d?.status==="WARNING"?"⚠ REVISAR ADVERTENCIAS":d?.status==="ERROR"?"✕ ERROR":"Validando…"}</b><span>{d?.checks??"—"} controles · {d?.errors??"—"} errores · {d?.warnings??"—"} advertencias</span></div></div><section className="card"><h2>Conciliación independiente</h2><Table rows={(d?.checks_detail||[]).filter((x:any)=>x.type==="independent_total")}/></section></>}
 

@@ -12,17 +12,27 @@ from .services.validation_service import validate_workbook
 from .services.qa_service import build_qa
 
 logging.basicConfig(level=logging.INFO)
-app=FastAPI(title='PROFORMA DASHBOARD API',version='5.0.0')
+app=FastAPI(title='PROFORMA DASHBOARD API',version='5.6.0')
 
-@app.get("/api/health")
-def health():
-    return {"status":"ok","excel_loaded":False}
+allowed_origins = [
+    FRONTEND_URL,
+    'http://localhost:5173',
+    'http://localhost:4173',
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=list(dict.fromkeys(allowed_origins)),
+    allow_credentials=True,
+    allow_methods=['GET','POST','OPTIONS'],
+    allow_headers=['*']
+)
 
-app.add_middleware(CORSMiddleware,allow_origins=[FRONTEND_URL,'http://localhost:5173'],allow_credentials=True,allow_methods=['GET','POST'],allow_headers=['*'])
-processor=ExcelProcessor(DATA_FILE); processor.load()
+processor=ExcelProcessor(DATA_FILE)
+processor.load()
+
 class LoginRequest(BaseModel): username:str; password:str
 @app.get('/api/health')
-def health(): return {'status':'ok','version':'5.0.0'}
+def health(): return {'status':'ok','version':'5.6.0','excel_loaded':False}
 @app.post('/api/auth/login')
 def login(body:LoginRequest): return {'access_token':authenticate(body.username,body.password)}
 @app.get('/api/me')

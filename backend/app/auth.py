@@ -5,6 +5,8 @@ from .config import JWT_SECRET, ADMIN_USERNAME, ADMIN_PASSWORD
 
 ALGORITHM = "HS256"
 
+# El usuario definido por Render corresponde a Gerencia General.
+# Gerencia Comercial utiliza el mismo password configurado para la prueba inicial.
 USERS = {
     ADMIN_USERNAME: {"password": ADMIN_PASSWORD, "role": "GERENCIA GENERAL"},
     "comercial": {"password": ADMIN_PASSWORD, "role": "GERENCIA COMERCIAL"},
