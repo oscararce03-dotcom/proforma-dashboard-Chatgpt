@@ -15,3 +15,6 @@ Frontend: `cd frontend && npm install && npm run dev`
 
 ## Render
 El `render.yaml` crea dos servicios: API y frontend estático. Configura las variables de entorno indicadas en el archivo.
+
+## V5.7 — Visual BI
+La versión V5.7 reconstruye los principales gráficos del Excel como gráficos web interactivos y responsivos. Incluye KPIs, comparativos 2025/2026, avance de objetivo, Pareto 80/20, oportunidad de crecimiento, rankings comerciales y tablas con búsqueda/paginación.

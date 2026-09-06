@@ -1,20 +1,14 @@
-# PROFORMA Dashboard V5.6
+# PROFORMA Dashboard V5.6 — corrección Render
 
-## Correcciones principales
+- Corregido el error de Render que estaba ejecutando Python 3.14 y compilando pydantic-core con Rust.
+- Python 3.11.11 queda fijado en raíz y backend mediante `.python-version` y `runtime.txt`.
+- Dependencias compatibles y estables para Python 3.11.
+- Se eliminó la carga del XLSM durante el arranque del proceso; ahora el Excel se carga de forma diferida al primer endpoint que lo necesita, reduciendo riesgo de segmentation fault en Render Free.
+- `reload` reinicia correctamente el procesador diferido.
+- Se conserva la autenticación V5.6 y los perfiles Gerencia General / Gerencia Comercial.
 
-- Corregida la autenticación inicial para usar por defecto:
-  - Gerencia General: `gerencia` / `Proforma2026`
-  - Gerencia Comercial: `comercial` / `Proforma2026`
-- Mantiene variables de entorno de Render para reemplazar estas credenciales de prueba.
-- Corregida la configuración CORS para la URL de GitHub Pages publicada.
-- Agregado endpoint `/api/me` para reconocer el perfil autenticado.
-- Menú diferenciado por perfil: Gerencia General y Gerencia Comercial.
-- Implementada la pantalla `Validación Excel`, que faltaba en el renderizado.
-- Implementada la pantalla `Control Excel vs BI` en el menú correspondiente.
-- Backend actualizado a versión 5.6.0.
-- Eliminada la duplicidad del endpoint `/api/health`.
-- Se mantiene Python 3.11.11 para Render y el workflow de GitHub Pages con Node 24.
+## Credenciales de prueba
+- Gerencia General: `gerencia` / `Proforma2026`
+- Gerencia Comercial: `comercial` / `Proforma2026`
 
-## Importante
-
-Para producción, definir en Render `JWT_SECRET`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` y `FRONTEND_URL`.
+En producción, usar `JWT_SECRET`, `ADMIN_USERNAME`, `ADMIN_PASSWORD` y `FRONTEND_URL` como variables de entorno en Render.
